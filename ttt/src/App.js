@@ -1,6 +1,8 @@
 
 import './App.css';
 import Login from './components/Login';
+import Game from './components/Game';
+import Navbar from './components/Navbar';
 import React,{useState,useEfeect,} from 'react';
 
 function App() {
@@ -13,7 +15,9 @@ const start=(e)=>{
 
   return (
     <div className="App">
-   {!isRegistered?<Login start={start}/>:<div>yx</div> } 
+     
+      {isRegistered? <Navbar/>:null } 
+   {!isRegistered?<Login start={start}/>:<Game/> } 
     </div>
   );
 }

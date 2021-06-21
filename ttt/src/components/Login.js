@@ -3,7 +3,7 @@ const Login =({start})=>{
 
 return(
 
-    <div className="container">
+    <div className="logincontainer">
     <form>
       <div className="input1">
       <label className="lbl1" htmlFor="player1">PLayer 1 </label>
