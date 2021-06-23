@@ -13,17 +13,17 @@ const style = {
 
 function Board(props) {
   const { squares, onClick } = props;
+  const s=[];
+     for (let i=0;i<squares.length;i++) {
+      s.push(<div className="square" onClick={()=>onClick(i)} key={i}>{squares[i]}</div>)
+    }
   return (
-    <div style={style}>
-      {squares.map((square, i) => (
-        <Square key={i} value={square} onClick={() => onClick(i)} />
-      ))}
+    <div className="container2">
+      {s}
     </div>
   );
 }
 
 export default Board;
 
-  /*  for (let i=0;i<9;i++) {
-      squares.push(<div className="square" onClick={()=>onClick(i)} key={i}>X</div>)
-    } {squares}*/
+ 
