@@ -7,9 +7,14 @@ import React,{useState,useEfeect,} from 'react';
 
 function App() {
   const [isRegistered,setIsregistered]=useState(false);
-const start=(e)=>{
+const startapp=(player1,player2)=>{
 
-  
+  localStorage.setItem('player1',JSON.stringify(player1));
+  localStorage.setItem('player2',JSON.stringify(player2));
+  localStorage.setItem('history',JSON.stringify([]));
+
+
+
  setIsregistered(true);
 }
 
@@ -17,7 +22,7 @@ const start=(e)=>{
     <div className="App">
      
       {isRegistered? <Navbar/>:null } 
-   {!isRegistered?<Login start={start}/>:<Game/> } 
+   {!isRegistered?<Login start={startapp}/>:<Game/> } 
     </div>
   );
 }

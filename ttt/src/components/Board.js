@@ -49,11 +49,35 @@ function Board(props) {
     setBoard(boardCopy);
     setXisNext(!xIsNext);
   }; 
+  const remove =()=>{
+    setBoard(Array(9).fill(null))
+    let  his=JSON.parse(localStorage.getItem("history"))
+    let player1=JSON.parse(localStorage.getItem("player1"));
+    let player2=JSON.parse(localStorage.getItem("player2"));
+    let date=new Date();
+    
+    let day=date.getDate();
+    let month=date.getUTCMonth()+1;
+    let hour=date.getHours();
+    let minutes=date.getMinutes();
+    let endTime="";
+    endTime=day+"." + month + " " + hour + ":" + minutes;
+    const d={
+      startTime:endTime,
+      opponents:`${player1} vs ${player2}`,
+      won:`player won`
+    }
+   his.push(d);
+   localStorage.setItem("history",JSON.stringify( his));
+   console.log(his);
 
-  const renderMoves = () => {
+  }
+  const resetgame = () => {
+     
+
     return (
       <div style={{ textAlign: "center" }}>
-        <button onClick={() => setBoard(Array(9).fill(null))}>
+        <button onClick={remove }>
           Reset Game
         </button>
       </div>
@@ -76,7 +100,7 @@ function Board(props) {
             ? `Winner: ` + winner
             : `Next Player: ` + (xIsNext ? "X" : "O")}
         </p>
-        {renderMoves()}
+        {resetgame()}
       </div>
     </div>
   );
