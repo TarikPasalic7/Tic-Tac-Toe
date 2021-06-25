@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 import Square from "./Square";
-
+import Endgame from "./Endgame";
 const style = {
   border: "4px solid darkblue",
   borderRadius: "10px",
@@ -10,9 +10,11 @@ const style = {
   display: "grid",
   gridTemplate: "repeat(3, 1fr) / repeat(3, 1fr)",
 };
-
-function Board(props) {
-
+let counter=0;
+let win="";
+function Board({plr1,plr2,update}) {
+    console.log(counter);
+    
     const calculateWinner=(squares)=> {
         const lines = [
           [0, 1, 2],
@@ -27,14 +29,106 @@ function Board(props) {
         
         for (let i = 0; i < lines.length; i++) {
           const [a, b, c] = lines[i];
+         
           if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-            return squares[a];
+              if(squares[a]==="X")
+              {
+              
+                 win=plr1;
+                 let  his=JSON.parse(localStorage.getItem("history"))
+    let player1=plr1
+    let player2=plr2
+    let date=new Date();
+    
+    let day=date.getDate();
+    let month=date.getUTCMonth()+1;
+    let hour=date.getHours();
+    let minutes=date.getMinutes();
+    let endTime="";
+    endTime=day+"." + month + " " + hour + ":" + minutes;
+    const d={
+        id:1,
+      startTime:endTime,
+      player1:player1,
+      player2:player2,
+      won:win
+    }
+   his.push(d);
+   localStorage.setItem("history",JSON.stringify( his));
+
+                  return squares[a];
+              }
+              else{
+                  
+                 win=plr2;
+                let  his=JSON.parse(localStorage.getItem("history"))
+   let player1=plr1
+   let player2=plr2
+   let date=new Date();
+   
+   let day=date.getDate();
+   let month=date.getUTCMonth()+1;
+   let hour=date.getHours();
+   let minutes=date.getMinutes();
+   let endTime="";
+   endTime=day+"." + month + " " + hour + ":" + minutes;
+   const d={
+       id:1,
+     startTime:endTime,
+     player1:player1,
+     player2:player2,
+     won:win
+   }
+  his.push(d);
+  localStorage.setItem("history",JSON.stringify( his));
+
+
+               
+                  return squares[a];
+              }
+           
           }
         }
-        return null;
+        if(counter===9)
+        {
+            win="draw";
+            let  his=JSON.parse(localStorage.getItem("history"))
+            let player1=plr1
+            let player2=plr2
+            let date=new Date();
+            
+            let day=date.getDate();
+            let month=date.getUTCMonth()+1;
+            let hour=date.getHours();
+            let minutes=date.getMinutes();
+            let endTime="";
+            endTime=day+"." + month + " " + hour + ":" + minutes;
+            const d={
+                id:1,
+              startTime:endTime,
+              player1:player1,
+              player2:player2,
+              won:win
+            }
+           his.push(d);
+           localStorage.setItem("history",JSON.stringify( his));
+           console.log(his);
+            
+
+            return "draw";
+        }
+        else{
+            counter++;
+            return null;
+        }
+        
+            
+        
+        
       }
   const [board, setBoard] = useState(Array(9).fill(null));
   const [xIsNext, setXisNext] = useState(true);
+
 
   const winner = calculateWinner(board);
   
@@ -51,25 +145,8 @@ function Board(props) {
   }; 
   const remove =()=>{
     setBoard(Array(9).fill(null))
-    let  his=JSON.parse(localStorage.getItem("history"))
-    let player1=JSON.parse(localStorage.getItem("player1"));
-    let player2=JSON.parse(localStorage.getItem("player2"));
-    let date=new Date();
-    
-    let day=date.getDate();
-    let month=date.getUTCMonth()+1;
-    let hour=date.getHours();
-    let minutes=date.getMinutes();
-    let endTime="";
-    endTime=day+"." + month + " " + hour + ":" + minutes;
-    const d={
-      startTime:endTime,
-      opponents:`${player1} vs ${player2}`,
-      won:`player won`
-    }
-   his.push(d);
-   localStorage.setItem("history",JSON.stringify( his));
-   console.log(his);
+    setXisNext(true);
+    counter=0;
 
   }
   const resetgame = () => {
@@ -84,7 +161,14 @@ function Board(props) {
     );
   };
 
+const again=()=>{
+ 
+    setBoard(Array(9).fill(null))
+    setXisNext(true);
+    counter=0;
+    update();
 
+}
 
  
   const s=[];
@@ -97,8 +181,8 @@ function Board(props) {
       <div >
         <p style={{ textAlign: "center" }}>
           {winner
-            ? `Winner: ` + winner
-            : `Next Player: ` + (xIsNext ? "X" : "O")}
+            ? <Endgame again={again} winner={win}/>
+            : `Next Player: ` + (xIsNext ? plr1 : plr2)}
         </p>
         {resetgame()}
       </div>
