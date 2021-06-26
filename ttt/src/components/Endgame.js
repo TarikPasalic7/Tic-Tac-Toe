@@ -1,12 +1,13 @@
 const Endgame =({again,winner})=>{
 const win =()=>{
+   
   if(winner==="draw")
   {
     return "Draw";
 
   }
   else{
-      return `${winner} wins`;
+      return ` You win ${winner}!! `;
   }
   
 

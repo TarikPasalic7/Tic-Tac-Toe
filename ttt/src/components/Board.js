@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import Square from "./Square";
 import Endgame from "./Endgame";
 const style = {
@@ -12,6 +12,7 @@ const style = {
 };
 let counter=0;
 let win="";
+
 function Board({plr1,plr2,update}) {
     console.log(counter);
     
@@ -55,7 +56,7 @@ function Board({plr1,plr2,update}) {
     }
    his.push(d);
    localStorage.setItem("history",JSON.stringify( his));
-
+  
                   return squares[a];
               }
               else{
@@ -83,7 +84,7 @@ function Board({plr1,plr2,update}) {
   localStorage.setItem("history",JSON.stringify( his));
 
 
-               
+
                   return squares[a];
               }
            
@@ -112,9 +113,8 @@ function Board({plr1,plr2,update}) {
             }
            his.push(d);
            localStorage.setItem("history",JSON.stringify( his));
-           console.log(his);
-            
-
+         
+           
             return "draw";
         }
         else{
@@ -128,11 +128,24 @@ function Board({plr1,plr2,update}) {
       }
   const [board, setBoard] = useState(Array(9).fill(null));
   const [xIsNext, setXisNext] = useState(true);
-
-
-  const winner = calculateWinner(board);
+const [isEnd,setIsEnd]=useState(false);
+const [historynext,sethistoryNext]=useState(false);
+let [winner,setWinner]=useState("");
   
-  console.log(board)
+ 
+useEffect(() => {
+    const w = calculateWinner(board);
+    setWinner(w);
+    if(w==="X" || w==="O" || w==="draw"){
+
+        setIsEnd(true);
+        setTimeout(() => {
+            
+            setIsEnd(false);
+            sethistoryNext(true);
+        }, 3000);
+    }
+}, [board])
   const play = (i) => {
     const boardCopy = [...board];
     if (winner || boardCopy[i]) {
@@ -144,6 +157,8 @@ function Board({plr1,plr2,update}) {
     setXisNext(!xIsNext);
   }; 
   const remove =()=>{
+      setIsEnd(false);
+      sethistoryNext(false);
     setBoard(Array(9).fill(null))
     setXisNext(true);
     counter=0;
@@ -162,28 +177,72 @@ function Board({plr1,plr2,update}) {
   };
 
 const again=()=>{
- 
+    setIsEnd(false);
+      sethistoryNext(false);
     setBoard(Array(9).fill(null))
     setXisNext(true);
     counter=0;
     update();
 
 }
+const message =()=>{
+   
+ if(winner ==="X")
+ return "PLayer1 wins";
+ if(winner ==="O")
+ return "PLayer2 wins";
+ if(winner ==="draw")
+ return "draw";
+   
+ 
 
+}
+
+const history =()=>{
+    let  his=JSON.parse(localStorage.getItem("history"));
+
+    return his.map((k,index)=>(
+     
+        <div key={index} >
+
+        <div  key={index} >
+
+            {`${k.startTime} ${k.player1} vs  ${k.player2}   ${k.won} won`}
+        </div>
+
+        </div>
+
+   ))
+
+
+
+}
  
   const s=[];
      for (let i=0;i<board.length;i++) {
       s.push(<div className="square" onClick={()=>play(i)} key={i}>{board[i]}</div>)
     }
   return (
+      <div>
     <div className="container2">
       {s}
-      <div >
+     
+    </div>
+    <div >
         <p style={{ textAlign: "center" }}>
           {winner
-            ? <Endgame again={again} winner={win}/>
+            ? <Endgame  again={again} winner={win}/>
             : `Next Player: ` + (xIsNext ? plr1 : plr2)}
+              <div>
+            {
+               isEnd? <div> {message()} </div>:null
+            }
+             {
+                historynext? <div>{history()}</div>:null
+            }
+        </div>
         </p>
+      
         {resetgame()}
       </div>
     </div>
