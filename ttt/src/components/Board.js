@@ -1,6 +1,10 @@
 import React,{useState,useEffect} from "react";
 import Square from "./Square";
 import Endgame from "./Endgame";
+import beep from "../audio/beep.mp3"
+
+let sound =new Audio(beep);
+let historyCount=1;
 const style = {
   border: "4px solid darkblue",
   borderRadius: "10px",
@@ -48,7 +52,7 @@ function Board({plr1,plr2,update}) {
     let endTime="";
     endTime=day+"." + month + " " + hour + ":" + minutes;
     const d={
-        id:1,
+        id:historyCount,
       startTime:endTime,
       player1:player1,
       player2:player2,
@@ -56,7 +60,7 @@ function Board({plr1,plr2,update}) {
     }
    his.push(d);
    localStorage.setItem("history",JSON.stringify( his));
-  
+   historyCount++;
                   return squares[a];
               }
               else{
@@ -74,7 +78,7 @@ function Board({plr1,plr2,update}) {
    let endTime="";
    endTime=day+"." + month + " " + hour + ":" + minutes;
    const d={
-       id:1,
+       id:historyCount,
      startTime:endTime,
      player1:player1,
      player2:player2,
@@ -82,7 +86,7 @@ function Board({plr1,plr2,update}) {
    }
   his.push(d);
   localStorage.setItem("history",JSON.stringify( his));
-
+ historyCount++;
 
 
                   return squares[a];
@@ -105,7 +109,7 @@ function Board({plr1,plr2,update}) {
             let endTime="";
             endTime=day+"." + month + " " + hour + ":" + minutes;
             const d={
-                id:1,
+                id:historyCount,
               startTime:endTime,
               player1:player1,
               player2:player2,
@@ -114,7 +118,7 @@ function Board({plr1,plr2,update}) {
            his.push(d);
            localStorage.setItem("history",JSON.stringify( his));
          
-           
+           historyCount++;
             return "draw";
         }
         else{
@@ -149,6 +153,7 @@ useEffect(() => {
   const play = (i) => {
     const boardCopy = [...board];
     if (winner || boardCopy[i]) {
+        sound.play();
       return;
     }
    
@@ -188,9 +193,9 @@ const again=()=>{
 const message =()=>{
    
  if(winner ==="X")
- return "PLayer1 wins";
+ return " The pLayer 1 wins";
  if(winner ==="O")
- return "PLayer2 wins";
+ return "The pLayer 2 wins";
  if(winner ==="draw")
  return "draw";
    
@@ -207,7 +212,7 @@ const history =()=>{
 
         <div  key={index} >
 
-            {`${k.startTime} ${k.player1} vs  ${k.player2}   ${k.won} won`}
+            {`${k.startTime} ${k.player1} vs  ${k.player2} ${k.won}  ${k.won!=="draw"?"  won":""} `}
         </div>
 
         </div>
@@ -232,7 +237,7 @@ const history =()=>{
         <p style={{ textAlign: "center" }}>
           {winner
             ? <Endgame  again={again} winner={win}/>
-            : `Next Player: ` + (xIsNext ? plr1 : plr2)}
+            : `Its  ` + (xIsNext ? plr1 : plr2) + `'s turn  `}
               <div>
             {
                isEnd? <div> {message()} </div>:null

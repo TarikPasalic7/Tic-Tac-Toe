@@ -6,7 +6,7 @@ const Login =({start})=>{
 return(
 
     <div className="logincontainer">
-    <form>
+    <form onSubmit={(e)=>start(e,player1,player2)}>
       <div className="input1">
       <label className="lbl1" htmlFor="player1">PLayer 1 </label>
       <input name="player1" placeholder="Payer1" onChange={(e)=>{setPlayer1(e.target.value)}} required />
@@ -17,7 +17,7 @@ return(
       </div>
      
 
-     <button onClick={()=>start(player1,player2)} >start</button>
+     <button type="submit">start</button>
       
     </form>
   </div>

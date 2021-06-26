@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from "react";
 const Navbar =({plr1,plr2,getplr1})=>{
-  const [player1,setPLayer1]=useState(0);
+ 
 
   
     const getplr2 =()=>{

@@ -21,10 +21,8 @@ function App() {
     return player1won.length;
 
   }
-const startapp=(player1,player2)=>{
-
-  localStorage.setItem('player1',JSON.stringify(player1));
-  localStorage.setItem('player2',JSON.stringify(player2));
+const startapp=(e,player1,player2)=>{
+  e.preventDefault()
   localStorage.setItem('history',JSON.stringify([]));
  setPlayer1(player1);
  setPlayer2(player2);
