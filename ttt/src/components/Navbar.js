@@ -28,10 +28,10 @@ const Navbar =({plr1,plr2,getplr1})=>{
 
     return(
         <div>
-            <h1>Tic Tac Toe</h1>
-            <span>{plr1}:{getplr1()}</span>
-            <span>{plr2}:{ getplr2()}</span>
-            <span>TIES:{tied()}</span>
+            <h1 className="hdr">Tic Tac Toe</h1>
+            <span className="navlbl">{plr1}: {getplr1()} </span>
+            <span className="navlbl">{plr2}: { getplr2()} </span>
+            <span className="navlbl">TIES: {tied()}</span>
         </div>
     )
    

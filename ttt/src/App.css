@@ -48,6 +48,16 @@
 
   margin-top: 80px;
 }
+.navlbl{
+  font-weight: bold;
+  font-size: larger;
+}
+.hdr{
+  color: coral;
+  font-family: fantasy;
+  font-size: 50px;
+
+}
 .rstBtn{
   background-color: coral;
   color: white;
