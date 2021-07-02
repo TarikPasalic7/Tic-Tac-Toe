@@ -174,7 +174,7 @@ useEffect(() => {
 
     return (
       <div style={{ textAlign: "center" }}>
-        <button onClick={remove }>
+        <button className="rstBtn" onClick={remove }>
           Reset Game
         </button>
       </div>
@@ -228,29 +228,32 @@ const history =()=>{
       s.push(<div className="square" onClick={()=>play(i)} key={i}>{board[i]}</div>)
     }
   return (
-      <div>
+ <div>
+      <div className="container"> 
+       
     <div className="container2">
       {s}
      
     </div>
-    <div >
-        <p style={{ textAlign: "center" }}>
-          {winner
-            ? <Endgame  again={again} winner={win}/>
-            : `Its  ` + (xIsNext ? plr1 : plr2) + `'s turn  `}
-              <div>
-            {
-               isEnd? <div> {message()} </div>:null
-            }
-             {
-                historynext? <div>{history()}</div>:null
-            }
-        </div>
-        </p>
-      
-        {resetgame()}
+   
       </div>
-    </div>
+       <div >
+       <p style={{ textAlign: "center" }}>
+         {winner
+           ? <Endgame  again={again} winner={win}/>
+           : `Its  ` + (xIsNext ? plr1 : plr2) + `'s turn  `}
+             <div>
+           {
+              isEnd? <div> {message()} </div>:null
+           }
+            {
+               historynext? <div>{history()}</div>:null
+           }
+       </div>
+       </p>
+     
+       {resetgame()}
+     </div></div>
   );
 }
 

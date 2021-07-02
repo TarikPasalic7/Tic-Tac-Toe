@@ -6,7 +6,11 @@
   display: inline-table;
   margin:30px auto;
    
-   background-color: rgb(233, 224, 220);
+   background-color: rgb(32, 176, 192);
+   
+}
+.container:hover{
+  cursor: pointer;
    
 }
 .logincontainer{
@@ -25,13 +29,16 @@
   display: grid;
   grid-auto-flow: column;
   grid-template-rows: repeat(3, 1fr);
+
   
 }
 .square{
   width: 100px;
   height: 100px;
-  border:solid black 1px;
+  border:solid rgb(255, 251, 251) 1px;
   font-size: 4pc;
+  color: white;
+  text-shadow: black 2px 2px;
 }
 .input1{
 
@@ -41,7 +48,22 @@
 
   margin-top: 80px;
 }
+.rstBtn{
+  background-color: coral;
+  color: white;
+  border-radius: 6px;
+  border-color: white;
+  width: 140px;
+  height: 40px;
+  font-size: larger;
 
+}
+.rstBtn:hover{
+  background-color: rgb(240, 229, 229);
+  color: coral;
+  cursor: pointer;
+
+}
 .startbtn{
   margin-top: 80px;
   width: 90px;
