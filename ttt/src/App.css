@@ -14,9 +14,11 @@
   margin:30px auto;
    width: 350px;
    height: 450px;
-   background-color: rgb(206, 141, 115);
+   background-color: rgb(76, 131, 157);
    border-radius: 10px;
+   box-shadow: rgb(151, 149, 149) 5px 4px 5px;
 }
+
 
 .container2{
 
@@ -42,10 +44,37 @@
 
 .startbtn{
   margin-top: 80px;
+  width: 90px;
+  height: 30px;
+  border-radius: 5px;
+  border-color: white;
+  font-size: larger;
+  background-color: rgb(153, 27, 71);
+  color: aliceblue;
 }
+.startbtn:hover{
+cursor: pointer;
+  background-color: rgb(235, 221, 226);
+  color: rgb(153, 27, 71);
+}
+
 .lbl1{
   display: block;
+  color: white;
+  font-family: fantasy;
+  font-size: x-large;
+  margin-bottom: 10px;
+  text-shadow: black 2px 2px ;
 }
-.lbl2{
-  display: block;
+.lblInput{
+  border-radius: 6px;
+  height: 20px;
+  border-color: white;
+
+}
+
+.lblInput:focus{
+  background-color: black;
+  color: white;
+
 }

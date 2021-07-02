@@ -9,15 +9,15 @@ return(
     <form onSubmit={(e)=>start(e,player1,player2)}>
       <div className="input1">
       <label className="lbl1" htmlFor="player1">PLayer 1 </label>
-      <input name="player1" placeholder="Payer1" onChange={(e)=>{setPlayer1(e.target.value)}} required />
+      <input className="lblInput" name="player1" placeholder="Payer1" onChange={(e)=>{setPlayer1(e.target.value)}} required />
       </div>
       <div className="input2">
-         <label  className="lbl2" htmlFor="player2">PLayer 2</label>
-      <input name="player2" onChange={(e)=>{setPlayer2(e.target.value)}}  placeholder="Payer2" required />
+         <label  className="lbl1" htmlFor="player2">PLayer 2</label>
+      <input className="lblInput" name="player2" onChange={(e)=>{setPlayer2(e.target.value)}}  placeholder="Payer2" required />
       </div>
      
 
-     <button type="submit">start</button>
+     <button className="startbtn" type="submit">START</button>
       
     </form>
   </div>
