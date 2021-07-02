@@ -17,7 +17,7 @@ const win =()=>{
  return(
      <div>
          <h2>{win()}</h2>
-         <button onClick={again}>Wanna try again?</button>
+         <button className="againbtn" onClick={again}>Wanna try again?</button>
      </div>
  )
 

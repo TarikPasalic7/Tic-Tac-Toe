@@ -58,6 +58,22 @@
   font-size: 50px;
 
 }
+.againbtn{
+  background-color: rgb(40, 150, 58);
+  color: white;
+  border-radius: 6px;
+  border-color: white;
+  width: 170px;
+  height: 40px;
+  font-size: larger;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.againbtn:hover{
+  cursor: pointer;
+  background-color: rgb(240, 229, 229);
+  color:rgb(40, 150, 58);
+}
 .rstBtn{
   background-color: coral;
   color: white;
