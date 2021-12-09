@@ -1,3 +1,5 @@
+
+import React, { useState } from "react";
 const Endgame =({again,winner})=>{
 const win =()=>{
    
